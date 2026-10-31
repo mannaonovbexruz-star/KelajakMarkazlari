@@ -16,9 +16,6 @@ export interface Member {
   interests: Record<Lang, string>;
 }
 
-const unsplash = (id: string) =>
-  `https://images.unsplash.com/${id}?auto=format&fit=crop&w=800&q=80`;
-
 export const members: Member[] = [
   {
     id: "azolar-7",

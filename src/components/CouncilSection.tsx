@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { ArrowUpRight, Search, UsersRound, X } from "lucide-react";
+import { Search, X } from "lucide-react";
 import { useApp } from "../AppContext";
 import { members, type Member } from "../data/members";
 import MemberCard from "./MemberCard";
@@ -34,9 +34,6 @@ export default function CouncilSection() {
     }
     return list;
   }, [filter, query, lang]);
-
-  const showRais = false;
-  const empty = visible.length === 0;
 
   return (
     <section className="council-section" id="council">
@@ -83,46 +80,6 @@ export default function CouncilSection() {
             )}
           </div>
         </div>
-
-        {showRais && rais && (
-          <motion.article
-            className="featured-member"
-            initial={reduced ? { opacity: 1 } : { opacity: 0, y: 32 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <button
-              type="button"
-              className="featured-photo-btn"
-              onClick={() => setActive(rais)}
-              aria-label={rais.name[lang]}
-            >
-              <span className="featured-badge">{t.council.filters.rais}</span>
-              <img
-                src={rais.photo}
-                alt={rais.name[lang]}
-                loading="lazy"
-                onError={(e) => {
-                  e.currentTarget.style.display = "none";
-                }}
-              />
-            </button>
-            <div className="featured-body">
-              <span className="member-grade">
-                <UsersRound size={14} />
-                <span>{rais.grade}</span>
-              </span>
-              <h3 className="featured-name">{rais.name[lang]}</h3>
-              <p className="featured-position">{rais.position[lang]}</p>
-              <p className="featured-bio">{rais.bio[lang]}</p>
-              <button type="button" className="member-link" onClick={() => setActive(rais)}>
-                {t.council.seeProfile}
-                <ArrowUpRight size={15} />
-              </button>
-            </div>
-          </motion.article>
-        )}
 
         <motion.div layout className="council-grid">
           <AnimatePresence mode="popLayout">
